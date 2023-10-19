@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB2D8A3C2AE1A17200E6E612 /* EmptyDashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2D8A3B2AE1A17200E6E612 /* EmptyDashView.swift */; };
+		FB78D0982AE0927600071B1C /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB78D0972AE0927600071B1C /* Dashboard.swift */; };
+		FB979A432AE077550066DC32 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB979A422AE077550066DC32 /* API.swift */; };
+		FBC840F52AE0B1460018FC42 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC840F42AE0B1460018FC42 /* Card.swift */; };
+		FBC840F92AE0B7600018FC42 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC840F82AE0B75F0018FC42 /* Data.swift */; };
+		FBC840FB2AE0B8820018FC42 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC840FA2AE0B8820018FC42 /* Cards.swift */; };
 		FBD2A08F2ADEFECE00EF337C /* Caritas_MonterreyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD2A08E2ADEFECE00EF337C /* Caritas_MonterreyApp.swift */; };
 		FBD2A0912ADEFECE00EF337C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD2A0902ADEFECE00EF337C /* ContentView.swift */; };
 		FBD2A0932ADEFECF00EF337C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBD2A0922ADEFECF00EF337C /* Assets.xcassets */; };
@@ -14,6 +20,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB2D8A3B2AE1A17200E6E612 /* EmptyDashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDashView.swift; sourceTree = "<group>"; };
+		FB78D0972AE0927600071B1C /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		FB979A422AE077550066DC32 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		FBC840F42AE0B1460018FC42 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		FBC840F82AE0B75F0018FC42 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		FBC840FA2AE0B8820018FC42 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		FBD2A08B2ADEFECE00EF337C /* Caritas_Monterrey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Caritas_Monterrey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD2A08E2ADEFECE00EF337C /* Caritas_MonterreyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caritas_MonterreyApp.swift; sourceTree = "<group>"; };
 		FBD2A0902ADEFECE00EF337C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +44,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FBC840F62AE0B7030018FC42 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FBD2A0902ADEFECE00EF337C /* ContentView.swift */,
+				FB78D0972AE0927600071B1C /* Dashboard.swift */,
+				FBC840FA2AE0B8820018FC42 /* Cards.swift */,
+				FB2D8A3B2AE1A17200E6E612 /* EmptyDashView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBC840F72AE0B72F0018FC42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB979A422AE077550066DC32 /* API.swift */,
+				FBC840F82AE0B75F0018FC42 /* Data.swift */,
+				FBC840F42AE0B1460018FC42 /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FBD2A0822ADEFECE00EF337C = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +84,9 @@
 		FBD2A08D2ADEFECE00EF337C /* Caritas_Monterrey */ = {
 			isa = PBXGroup;
 			children = (
+				FBC840F72AE0B72F0018FC42 /* Model */,
+				FBC840F62AE0B7030018FC42 /* Views */,
 				FBD2A08E2ADEFECE00EF337C /* Caritas_MonterreyApp.swift */,
-				FBD2A0902ADEFECE00EF337C /* ContentView.swift */,
 				FBD2A0922ADEFECF00EF337C /* Assets.xcassets */,
 				FBD2A0942ADEFECF00EF337C /* Preview Content */,
 			);
@@ -137,7 +171,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB2D8A3C2AE1A17200E6E612 /* EmptyDashView.swift in Sources */,
 				FBD2A0912ADEFECE00EF337C /* ContentView.swift in Sources */,
+				FBC840F92AE0B7600018FC42 /* Data.swift in Sources */,
+				FB979A432AE077550066DC32 /* API.swift in Sources */,
+				FBC840FB2AE0B8820018FC42 /* Cards.swift in Sources */,
+				FBC840F52AE0B1460018FC42 /* Card.swift in Sources */,
+				FB78D0982AE0927600071B1C /* Dashboard.swift in Sources */,
 				FBD2A08F2ADEFECE00EF337C /* Caritas_MonterreyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
