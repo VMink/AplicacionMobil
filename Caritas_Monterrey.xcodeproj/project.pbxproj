@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1F3F4B2AE1A55F00161B1A /* DetallesReciboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1F3F4A2AE1A55F00161B1A /* DetallesReciboView.swift */; };
 		FB2D8A3C2AE1A17200E6E612 /* EmptyDashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2D8A3B2AE1A17200E6E612 /* EmptyDashView.swift */; };
 		FB78D0982AE0927600071B1C /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB78D0972AE0927600071B1C /* Dashboard.swift */; };
 		FB979A432AE077550066DC32 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB979A422AE077550066DC32 /* API.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B1F3F4A2AE1A55F00161B1A /* DetallesReciboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetallesReciboView.swift; sourceTree = "<group>"; };
 		FB2D8A3B2AE1A17200E6E612 /* EmptyDashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDashView.swift; sourceTree = "<group>"; };
 		FB78D0972AE0927600071B1C /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		FB979A422AE077550066DC32 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			children = (
 				FBD2A0902ADEFECE00EF337C /* ContentView.swift */,
 				FB78D0972AE0927600071B1C /* Dashboard.swift */,
+				0B1F3F4A2AE1A55F00161B1A /* DetallesReciboView.swift */,
 				FBC840FA2AE0B8820018FC42 /* Cards.swift */,
 				FB2D8A3B2AE1A17200E6E612 /* EmptyDashView.swift */,
 			);
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B1F3F4B2AE1A55F00161B1A /* DetallesReciboView.swift in Sources */,
 				FB2D8A3C2AE1A17200E6E612 /* EmptyDashView.swift in Sources */,
 				FBD2A0912ADEFECE00EF337C /* ContentView.swift in Sources */,
 				FBC840F92AE0B7600018FC42 /* Data.swift in Sources */,
