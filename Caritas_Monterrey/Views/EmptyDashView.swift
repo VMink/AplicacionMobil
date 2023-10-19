@@ -18,7 +18,7 @@ struct emptyDashView: View {
                   .foregroundColor(.clear)
                   .frame(width: 435, height: 191)
                   .background(
-                    Image("back")
+                    Image("top")
                         .resizable(resizingMode: .stretch)
                       .aspectRatio(contentMode: .fill)
                       .frame(width: 435, height: 191)
