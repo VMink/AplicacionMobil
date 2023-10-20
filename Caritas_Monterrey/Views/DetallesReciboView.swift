@@ -12,6 +12,7 @@ struct DetallesReciboView: View {
     @State private var showAlert = false
     @State private var pagado = 0
     @State private var sinComentario = false
+    @Environment(\.dismiss) private var dismiss
     var card: Card
     var body: some View {
         NavigationView{
@@ -21,7 +22,20 @@ struct DetallesReciboView: View {
                         .foregroundColor(.clear)
                         .frame(width: 430, height: 110)
                         .background(Color(red: 0, green: 0.23, blue: 0.36))
-                    
+                    VStack (alignment: .leading){
+                        HStack {
+                            Button {
+                                dismiss()
+                            } label: {
+                                Image(systemName: "arrow.left.circle.fill")
+                                    .foregroundStyle(.white)
+                                    .font(.largeTitle)
+                                    .padding(.leading, 30)
+                                    .padding(.top, 45)
+                            }
+                            Spacer()
+                        }
+                    }
                     VStack{
                         Text("Detalles del recibo")
                             .font(
@@ -65,7 +79,7 @@ struct DetallesReciboView: View {
                         
                             
                         
-                        Text("\(card.importe)")
+                        Text("\(card.IMPORTE)")
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)
@@ -81,7 +95,7 @@ struct DetallesReciboView: View {
                             .padding(.top, 0.7)
                             
                         
-                        Text("\(card.direccion)")
+                        Text("\(card.DIRECCION)")
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)
@@ -96,7 +110,7 @@ struct DetallesReciboView: View {
                             .foregroundColor(.black)
                             .padding(.top, 0.5)
                         
-                        Text("\(card.referencia_domicilio)")
+                        Text("\(card.REFERENCIA_DOMICILIO)")
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)
@@ -119,7 +133,7 @@ struct DetallesReciboView: View {
                             .padding(.top, 0.7)
                             
                         
-                        Text("\(card.tel_casa)")
+                        Text("\(card.TEL_CASA)")
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)
@@ -138,7 +152,7 @@ struct DetallesReciboView: View {
                             .foregroundColor(.black)
                             .padding(.top, 0.7)
                             
-                        Text("\(card.tel_movil)")
+                        Text("\(card.TEL_MOVIL)")
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)
@@ -159,7 +173,7 @@ struct DetallesReciboView: View {
                         
                             
                         
-                        TextField("Comentatio", text: $comentario)
+                        TextField("Comentario", text: $comentario)
                             .disableAutocorrection(true)
                             .frame(width: 297,height: 80,alignment: .topLeading)
                             .border(.black)
@@ -186,7 +200,7 @@ struct DetallesReciboView: View {
                       
                     }
                     .onAppear(){
-                        pagado = card.status_pago
+                        pagado = card.ESTATUS_PAGO
                     }
                     
                     VStack(alignment: .center){

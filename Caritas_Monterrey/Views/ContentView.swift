@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var Funciona: String = ""
-    @State private var Funciona2: String = ""
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var mensajeError: String = ""
     @State private var isNavigating = false
-    @State var Funciona3 = [Post]()
+    @State private var navigateNoOrders = false
+    @State var Funciona3 = [Card]()
     var body: some View {
         NavigationStack() {
             VStack {
@@ -29,7 +31,7 @@ struct ContentView: View {
                         .font(.system(size: 24).bold())
                         .multilineTextAlignment(.center)
                         .padding(.top, 34)
-                    TextField("", text: $Funciona, prompt: Text("Usuario").foregroundColor(Color(red: 0, green: 59/255, blue: 92/255)))
+                    TextField("", text: $username, prompt: Text("Usuario").foregroundColor(Color(red: 0, green: 59/255, blue: 92/255)))
                         .padding([.leading, .trailing], 42)
                         .padding(.top, 40)
                         .foregroundColor(Color(red: 0, green: 59/255, blue: 92/255))
@@ -39,7 +41,7 @@ struct ContentView: View {
                         .fill(Color(red: 0, green: 59/255, blue: 92/255))
                         .frame(height: 2)
                         .padding(.horizontal, 28)
-                    SecureField("", text: $Funciona2, prompt: Text("Contraseña").foregroundColor(Color(red: 0, green: 59/255, blue: 92/255)))
+                    SecureField("", text: $password, prompt: Text("Contraseña").foregroundColor(Color(red: 0, green: 59/255, blue: 92/255)))
                         .padding([.leading, .trailing], 42)
                         .padding(.top, 40)
                         .foregroundColor(Color(red: 0, green: 59/255, blue: 92/255))
@@ -48,9 +50,19 @@ struct ContentView: View {
                         .fill(Color(red: 0, green: 59/255, blue: 92/255))
                         .frame(height: 2)
                         .padding(.horizontal, 28)
+                    Text(mensajeError)
+                        .font(.system(size: 20))
+                        .foregroundColor(.red)
                     Button("Iniciar Sesión", action: {
-                        Api().callApi()
-                        isNavigating = true
+                        if validate() {
+                            isNavigating = true
+                        }
+                        else if sinRecibos() {
+                            navigateNoOrders = true
+                        }
+                        else {
+                            mensajeError = "Credenciales Incorrectas"
+                        }
                     })
                         .frame(width: 308, height: 54)
                         .background(Color(red: 0, green: 59/255, blue: 92/255))
@@ -58,9 +70,12 @@ struct ContentView: View {
                         .font(.system(size: 24).bold())
                         .foregroundColor(.white)
                         .padding(.top, 30)
-                    NavigationLink(destination: Dashboard().navigationBarBackButtonHidden(true), isActive: $isNavigating) {
-                        EmptyView()
-                    }
+                        .navigationDestination(isPresented: $isNavigating) {
+                            Dashboard().navigationBarBackButtonHidden()
+                        }
+                        .navigationDestination(isPresented: $navigateNoOrders) {
+                            EmptyDashView().navigationBarBackButtonHidden()
+                        }
                     
                     Spacer()
                 }
@@ -83,6 +98,20 @@ struct ContentView: View {
                 endPoint: UnitPoint(x: 0.99, y: 1)
                 )
                 )}
+    }
+    private func validate() -> Bool {
+        if (username == "Gustavo" && password == "12345"){
+           return true
+        }else{
+            return false
+        }
+    }
+    private func sinRecibos() -> Bool {
+        if (username == "Abee" && password == "12345") {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct Cards: View {
+    @State private var squareBg = false
     var card: Card
     var body: some View {
         HStack{
             Rectangle()
             .foregroundColor(.clear)
             .frame(width: 19, height: 151)
-            .background(Color(red: 1, green: 0.5, blue: 0.2))
+            .background(squareBg ? Color(red: 0, green: 0.5, blue: 0) : Color(red: 1, green: 0.5, blue: 0.2))
+            .onAppear(perform: {
+                changeBg()
+            })
             VStack(alignment: .leading) {
                 Text("Recibo")
                     .font(.system(size:25).bold())
@@ -24,9 +28,9 @@ struct Cards: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text("Direccion")
+                Text("Domicilio")
                     .font(.system(size:25).bold())
-                Text("\(card.direccion)")
+                Text("\(card.DIRECCION)")
                     .font(.system(size: 20).bold())
                     .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
                     .multilineTextAlignment(.trailing)
@@ -36,6 +40,12 @@ struct Cards: View {
         .frame(width: 357, height: 151)
         .background(Color.white.shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4))
         
+    }
+    
+    private func changeBg() {
+        if card.ESTATUS_PAGO == 1 {
+            squareBg = true
+        }
     }
 }
 
