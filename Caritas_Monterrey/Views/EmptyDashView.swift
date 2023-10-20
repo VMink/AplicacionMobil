@@ -1,13 +1,13 @@
 //
-//  emptyDashView.swift
+//  EmptyDashView.swift
 //  Caritas_Monterrey
 //
-//  Created by Alumno on 18/10/23.
+//  Created by Alumno on 20/10/23.
 //
 
 import SwiftUI
 
-struct emptyDashView: View {
+struct EmptyDashView: View {
     @State private var selectedFilter = 0
     @State private var isFilterExpanded = false
     
@@ -25,30 +25,23 @@ struct emptyDashView: View {
                       .clipped()
                   )
                 
-                VStack {
-                    HStack {
-                        Text("Bienvenido de Vuelta")
-                            .font(.title
-                        )
+                VStack(alignment: .leading) {
+                    Text("Bienvenido de Vuelta")
+                        .font(.system(size: 26).bold())
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding(.trailing, 65)
-                        .padding(.top, 30)
-                    }
-                    
+                        .padding(.trailing, 60)
                     Text("Estas son tus recolecciones de hoy")
                         .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .padding(.trailing, 18)
-                    .padding(.bottom, -10)
-                    
-                    Picker(selection: $selectedFilter, label: Text("Ordenar por")) {
-                        Text("No cobrados").tag(0)
-                        Text("Cobrados").tag(1)
-                    }
-                    .padding(.trailing, 215)
-
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .padding(.trailing, 30)
+                    Picker(selection: $selectedFilter, label: Text("Ordenar por").font(.title)) {
+                                            Text("No cobrados").tag(0)
+                                            Text("Cobrados").tag(1)
+                    }.colorMultiply(.black).colorInvert()
+                        .padding(.top, -19)
+                        .padding(.leading, -11)
                 }
             }
             
@@ -80,6 +73,6 @@ struct emptyDashView: View {
 
 struct emptyDashView_Previews: PreviewProvider {
     static var previews: some View {
-        emptyDashView()
+        EmptyDashView()
     }
 }

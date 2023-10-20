@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Dashboard: View {
+    @State var listaPrueba :Array<Card> = []
+    @State private var selectedFilter = 0
+    
     var body: some View {
         NavigationStack {
             VStack{
@@ -18,28 +21,29 @@ struct Dashboard: View {
                     .frame(width: 435, height: 191)
                     .clipped()
                         
-                    VStack {
-                        HStack {
-                            Text("Bienvenido de Vuelta")
-                                .font(.system(size: 26).bold())
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .padding(.trailing, 60)
-                            
-                            Image("filter")
-                                .frame(width: 30, height: 18.75)
-                        }
+                    VStack(alignment: .leading) {
+                        Text("Bienvenido de Vuelta")
+                            .font(.system(size: 26).bold())
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 60)
                         Text("Estas son tus recolecciones de hoy")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .padding(.trailing, 30)
+                        Picker(selection: $selectedFilter, label: Text("Ordenar por").font(.title)) {
+                                                Text("No cobrados").tag(0)
+                                                Text("Cobrados").tag(1)
+                        }.colorMultiply(.black).colorInvert()
+                            .padding(.top, -19)
+                            .padding(.leading, -11)
                     }
                 }
                 VStack {
-                    List(listaCards) { cardItem in
+                    List(listaPrueba) { cardItem in
                         NavigationLink {
-                            DetallesReciboView(card: cardItem)
+                            DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
                         }
                     label: {
                         Cards(card: cardItem)
@@ -49,6 +53,12 @@ struct Dashboard: View {
                     .padding(.top, 20)
                 }
                 .padding(.top, -50)
+                .onAppear(){
+                    listaPrueba = callApi()
+                    print("Dachboard")
+                    print(listaPrueba)
+                }
+                
                 Spacer()
                     
             }
