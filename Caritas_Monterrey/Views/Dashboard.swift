@@ -39,7 +39,7 @@ struct Dashboard: View {
                 VStack {
                     List(listaCards) { cardItem in
                         NavigationLink {
-                            
+                            DetallesReciboView(card: cardItem)
                         }
                     label: {
                         Cards(card: cardItem)
