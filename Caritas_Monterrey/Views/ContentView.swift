@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Caritas_Monterrey
 //
-//  Created by Alumno on 17/10/23.
+//  Created by Equipo 2 on 17/10/23.
 //
 
 import SwiftUI
@@ -18,41 +18,50 @@ struct ContentView: View {
         NavigationStack() {
             VStack {
                 HStack{Spacer()}
+                
                 Image("caritas")
                     .resizable()
                     .frame(width: 311, height: 153)
+                
                 Text("Control de Donaciones")
                     .font(.system(size: 27).bold())
                     .foregroundColor(.white)
                     .padding([.top, .bottom], 21)
+                
                 VStack{
                     Text("Inicia sesión para\ncontinuar")
                         .foregroundColor(Color(red: 45/255, green: 45/255, blue: 45/255))
                         .font(.system(size: 24).bold())
                         .multilineTextAlignment(.center)
                         .padding(.top, 34)
+                    
                     TextField("", text: $username, prompt: Text("Usuario").foregroundColor(Color(red: 0, green: 59/255, blue: 92/255)))
                         .padding([.leading, .trailing], 42)
                         .padding(.top, 40)
                         .foregroundColor(Color(red: 0, green: 59/255, blue: 92/255))
                         .font(.system(size: 20).bold())
                         .accentColor(Color(red: 0, green: 59/255, blue: 92/255))
+                    
                     Rectangle()
                         .fill(Color(red: 0, green: 59/255, blue: 92/255))
                         .frame(height: 2)
                         .padding(.horizontal, 28)
+                    
                     SecureField("", text: $password, prompt: Text("Contraseña").foregroundColor(Color(red: 0, green: 59/255, blue: 92/255)))
                         .padding([.leading, .trailing], 42)
                         .padding(.top, 40)
                         .foregroundColor(Color(red: 0, green: 59/255, blue: 92/255))
                         .font(.system(size: 20).bold())
+                    
                     Rectangle()
                         .fill(Color(red: 0, green: 59/255, blue: 92/255))
                         .frame(height: 2)
                         .padding(.horizontal, 28)
+                    
                     Text(mensajeError)
                         .font(.system(size: 20))
                         .foregroundColor(.red)
+                    
                     Button("Iniciar Sesión", action: {
                         if validate() {
                             isNavigating = true
@@ -99,6 +108,7 @@ struct ContentView: View {
                 )
                 )}
     }
+    
     private func validate() -> Bool {
         if (username == "Gustavo" && password == "12345"){
            return true
@@ -106,6 +116,7 @@ struct ContentView: View {
             return false
         }
     }
+    
     private func sinRecibos() -> Bool {
         if (username == "Abee" && password == "12345") {
             return true
