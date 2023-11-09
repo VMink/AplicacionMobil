@@ -63,14 +63,12 @@ struct ContentView: View {
                         .foregroundColor(.red)
                     
                     Button("Iniciar Sesión", action: {
-                        if validate() {
-                            isNavigating = true
-                        }
-                        else if sinRecibos() {
-                            navigateNoOrders = true
-                        }
-                        else {
-                            mensajeError = "Credenciales Incorrectas"
+                        loginRecolector(username: username, password: password) { userId in
+                            if userId > 0 {
+                                isNavigating = true
+                            } else {
+                                mensajeError = "Credenciales Incorrectas"
+                            }
                         }
                     })
                         .frame(width: 308, height: 54)
@@ -112,7 +110,7 @@ struct ContentView: View {
     private func validate() -> Bool {
         if (username == "Gustavo" && password == "12345"){
            return true
-        }else{
+        } else{
             return false
         }
     }
