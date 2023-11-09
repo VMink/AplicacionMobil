@@ -8,13 +8,20 @@
 import Foundation
 
 struct Card: Codable, Identifiable {
+    var A_MATERNO: String
+    var A_PATERNO: String
     var DIRECCION: String
+    var EMAIL: String
     var ESTATUS_PAGO: Int
-    var IMPORTE: Float
+    var FECHA_COBRO: String
+    var ID_DONANTE: Int
+    var ID_RECOLECTOR: Int
+    var IMPORTE: Int
+    var NOMBRE: String
     var REFERENCIA_DOMICILIO: String
     var TEL_CASA: String
     var TEL_MOVIL: String
-    var id: Int
+    var id: String
     
 }
 
@@ -49,10 +56,7 @@ func loginRecolector(username: String, password: String, completion: @escaping (
             if let data = data {
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                        print("API RESPONSE: \(json)")
-
                         let userId = (json["id"] as? Int) ?? 0
-                        print(userId)
                         completion(userId)
                     } else {
                         print("Error: Unable to parse API response as JSON.")
@@ -71,12 +75,64 @@ func loginRecolector(username: String, password: String, completion: @escaping (
     }
 }
 
+func dashboardRecolector(completion: @escaping ([Card]) -> Void) {
+    var cards: [Card] = []
+
+    let apiUrl = URL(string: "http://10.14.255.85:8085/recibosRecolector")!
+
+    if let idRecolector = UserDefaults.standard.string(forKey: "userId") {
+        let parameters: [String: Any] = [
+            "IdRecolector": idRecolector
+        ]
+
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters)
+
+            var request = URLRequest(url: apiUrl)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonData
+
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Error: \(error)")
+                    completion(cards)
+                    return
+                }
+
+                let jsonDecoder = JSONDecoder()
+
+                if let data = data {
+                    do {
+                        let cardList = try jsonDecoder.decode([Card].self, from: data)
+
+                        print("Lista \(cardList) ")
+
+                        for cardItem in cardList {
+                            print("Id: \(cardItem.id) - Dirección \(cardItem.DIRECCION)")
+                        }
+                        cards = cardList
+                        completion(cards)
+                    } catch {
+                        print("Error parsing JSON: \(error)")
+                        completion(cards)
+                    }
+                }
+            }
+            task.resume()
+        } catch {
+            print("Error encoding JSON: \(error)")
+            completion(cards)
+        }
+    }
+}
+
 func callApi() -> Array<Card>{
     var cards: Array<Card> = []
     
     print("Entrando a API")
     
-    guard let url = URL(string: "http://10.14.255.85:8082/datosDiarios") else {
+    guard let url = URL(string: "http://10.14.255.85:8085/recibosManager") else {
         return cards
     }
     
@@ -92,7 +148,7 @@ func callApi() -> Array<Card>{
                 print("Lista \(cardList) ")
                 
                 for cardItem in cardList {
-                    print("Id: \(cardItem.id) - Direccion \(cardItem.DIRECCION)")
+                    print("Id: \(cardItem.id) - Dirección \(cardItem.DIRECCION)")
                 }
                 cards = cardList
             } catch {
