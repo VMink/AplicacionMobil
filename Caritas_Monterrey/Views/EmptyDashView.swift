@@ -31,17 +31,13 @@ struct EmptyDashView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.trailing, 60)
+                        .padding(.top, 20)
+                    
                     Text("Estas son tus recolecciones de hoy")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .padding(.trailing, 30)
-                    Picker(selection: $selectedFilter, label: Text("Ordenar por").font(.title)) {
-                                            Text("No cobrados").tag(0)
-                                            Text("Cobrados").tag(1)
-                    }.colorMultiply(.black).colorInvert()
-                        .padding(.top, -19)
-                        .padding(.leading, -11)
                 }
             }
             

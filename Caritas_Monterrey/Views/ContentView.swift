@@ -64,10 +64,19 @@ struct ContentView: View {
                     
                     Button("Iniciar Sesión", action: {
                         loginRecolector(username: username, password: password) { userId in
-                            if userId > 0 {
-                                isNavigating = true
+                            if (userId > 0) {
+                                mensajeError = ""
+                                UserDefaults.standard.setValue(userId, forKey: "userId")
                             } else {
                                 mensajeError = "Credenciales Incorrectas"
+                            }
+                            
+                            dashboardRecolector { cards in
+                                if (cards.isEmpty && userId > 0) {
+                                    navigateNoOrders = true
+                                } else if (!cards.isEmpty && userId > 0){
+                                    isNavigating = true
+                                }
                             }
                         }
                     })

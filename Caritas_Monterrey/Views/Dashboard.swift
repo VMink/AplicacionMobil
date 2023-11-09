@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Dashboard: View {
     @State var listaPrueba :Array<Card> = []
+    @State private var isEmpty: Bool = false
     @State private var selectedFilter = 0
     
     var body: some View {
@@ -54,8 +55,15 @@ struct Dashboard: View {
                 }
                 .padding(.top, -50)
                 .onAppear(){
-                    listaPrueba = callApi()
-                    print("Dachboard")
+                    dashboardRecolector { cards in
+                            if cards.isEmpty {
+                                print("No cards received")
+                                isEmpty = true
+                            } else {
+                                listaPrueba = cards
+                            }
+                        }
+                    print("Dashboard")
                     print(listaPrueba)
                 }
                 
