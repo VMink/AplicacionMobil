@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Dashboard: View {
     @State var listaPrueba :Array<Card> = []
-    @State private var isEmpty: Bool = false
     @State private var selectedFilter = 0
     
     var body: some View {
@@ -43,12 +42,15 @@ struct Dashboard: View {
                 }
                 VStack {
                     List(listaPrueba) { cardItem in
-                        NavigationLink {
-                            DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
+                        if cardItem.ESTATUS_PAGO != 1 {
+                            NavigationLink {
+                                DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
+                            } label: {
+                                Cards(card: cardItem)
+                            }
+                        } else {
+                            Cards(card: cardItem)
                         }
-                    label: {
-                        Cards(card: cardItem)
-                    }
                     }
                     .listStyle(.plain)
                     .padding(.top, 20)
@@ -58,7 +60,6 @@ struct Dashboard: View {
                     dashboardRecolector { cards in
                             if cards.isEmpty {
                                 print("No cards received")
-                                isEmpty = true
                             } else {
                                 listaPrueba = cards
                             }
