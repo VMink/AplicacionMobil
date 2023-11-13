@@ -4,7 +4,8 @@ En este proyecto se abordará el desarrollo de una solución integral y segura q
 <br>
 </br>
 De tal modo, la necesidad de una aplicación móvil en iOS diseñada específicamente para abordar estos desafíos se convierte en un imperativo para Cáritas de Monterrey, pues esta aplicación podría no solo aumentar la eficiencia, seguridad y precisión en la recolección de donaciones, sino también fortalecer la confianza de los donantes y asegurar que los recursos lleguen de manera efectiva a quienes más los necesitan. Así, el desarrollo móvil en iOS en conjunto con el uso de herramientas empleadas por expertos en ciberseguridad, metodologías de desarrollo de software ágiles y la gestión de proyectos será clave para garantizar la solución de esta problemática. Es por ello que este proyecto contiene una propuesta de aplicación con los requerimientos solicitados por la organización. Dicha aplicación se divide en dos módulos, Recolector y Manager.
-
+<br>
+</br>
 ## Equipo 2: FC Barcelona
 <div align="center">
 <img src="https://forthebadge.com/images/badges/powered-by-coders-sweat.svg" width="250px">
