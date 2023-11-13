@@ -1,6 +1,6 @@
 //
 //  Dashboard.swift
-//  Caritas_Monterrey Sprint 2
+//  Caritas_Monterrey
 //
 //  Created by Alumno on 18/10/23.
 //
@@ -60,12 +60,14 @@ struct Dashboard: View {
                 }
                 VStack {
                     List(listaPrueba) { cardItem in
-                        if (cardItem.FECHA_PAGO == "") {
+                        if (cardItem.FECHA_PAGO == "" && cardItem.ESTATUS_PAGO != 1) {
                             NavigationLink {
                                 DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
                             } label: {
                                 Cards(card: cardItem)
                             }
+                        } else if (cardItem.ESTATUS_PAGO == 1) {
+                            Cards(card: cardItem)
                         } else {
                             Cards(card: cardItem)
                         }
