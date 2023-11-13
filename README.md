@@ -48,3 +48,6 @@ En este proyecto se abordará el desarrollo de una solución integral y segura q
 1. [Documento de primera Entrega](https://docs.google.com/document/d/1FU--T_V6r2HdOvQUN66BRGiJ24qyE3vk9rTimNSH4_8/edit?usp=sharing)
 
 2. [Documento de Segunda Entrega](https://docs.google.com/document/d/1CAPHNk-6dLt_x0R2uCbSaKYclDm0Tlr3cuIQXjMwgjs/edit?usp=sharing)
+
+# Repositorio App Manager
+[Acceso a github](https://github.com/Maffergu/Manager_Caritas_Monterrey.git)
