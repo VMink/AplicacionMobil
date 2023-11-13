@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct Cards: View {
-    @State private var squareBg = false
+    @State private var squareBg = Color(red: 161/255, green: 90/255, blue: 149/255) 
     var card: Card
     var body: some View {
         HStack{
             Rectangle()
             .foregroundColor(.clear)
             .frame(width: 19, height: 151)
-            .background(squareBg ? Color(red: 0, green: 0.5, blue: 0) : Color(red: 1, green: 0.5, blue: 0.2))
+            .background(squareBg)
             .onAppear(perform: {
                 changeBg()
             })
             VStack(alignment: .leading) {
-                Text("Recibo")
+                Text("Nombre")
                     .font(.system(size:25).bold())
-                Text("\(card.id)")
-                    .font(.system(size: 25).bold())
+                Text("\(card.NOMBRE_DONANTE)")
+                    .font(.system(size: 20).bold())
                     .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                Text("Recibo: \(card.ID_RECIBO)")
+                    .font(.system(size:20).bold())
             }
             Spacer()
             VStack(alignment: .trailing) {
@@ -44,7 +46,10 @@ struct Cards: View {
     
     private func changeBg() {
         if card.ESTATUS_PAGO == 1 {
-            squareBg = true
+            squareBg = Color(red: 0, green: 0.5, blue: 0)
+        }
+        if card.FECHA_PAGO != "" && card.ESTATUS_PAGO == 0 {
+            squareBg = Color(red: 1, green: 0.5, blue: 0.2)
         }
     }
 }

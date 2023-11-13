@@ -67,6 +67,8 @@ struct ContentView: View {
                             if (userId > 0) {
                                 mensajeError = ""
                                 UserDefaults.standard.setValue(userId, forKey: "userId")
+                            } else if (userId == -1) {
+                                mensajeError = "Ha ocurrido un error"
                             } else {
                                 mensajeError = "Credenciales Incorrectas"
                             }
@@ -114,22 +116,6 @@ struct ContentView: View {
                 endPoint: UnitPoint(x: 0.99, y: 1)
                 )
                 )}
-    }
-    
-    private func validate() -> Bool {
-        if (username == "Gustavo" && password == "12345"){
-           return true
-        } else{
-            return false
-        }
-    }
-    
-    private func sinRecibos() -> Bool {
-        if (username == "Abee" && password == "12345") {
-            return true
-        } else {
-            return false
-        }
     }
 }
 

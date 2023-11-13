@@ -12,6 +12,8 @@ struct DetallesReciboView: View {
     @State private var showAlert = false
     @State private var pagado = 0
     @State private var sinComentario = false
+    @State private var mensajeError = ""
+    @State private var regresar = false
     @Environment(\.dismiss) private var dismiss
     var card: Card
     var body: some View {
@@ -53,39 +55,54 @@ struct DetallesReciboView: View {
                 }
                 VStack(alignment: .leading){
                     VStack(alignment: .leading){
-                        Text("Recibo")
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Recibo")
+                                    .font(
+                                        Font.system(size: 22)
+                                            .weight(.bold)
+                                    )
+                                    .foregroundColor(.black)
+                                var idString = String(card.ID_RECIBO)
+                                Text("\(idString)")
+                                    .font(
+                                        Font.system(size: 25)
+                                            .weight(.bold)
+                                    )
+                                    .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Text("Monto")
+                                    .font(
+                                        Font.system( size: 22)
+                                            .weight(.bold)
+                                    )
+                                    .foregroundColor(.black)
+                                    .bold()
+                                Text("$\(card.IMPORTE, specifier: "%.2f")")
+                                    .font(
+                                        Font.system(size: 25)
+                                            .weight(.semibold)
+                                    )
+                                    .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                            }
+                        }
+                        Text("Nombre")
                             .font(
-                                Font.system(size: 22)
+                                Font.system(size: 20)
                                     .weight(.bold)
                             )
                             .foregroundColor(.black)
-                            .padding(.top, 2)
                             
                         
-                        Text("\(card.id)")
-                            .font(
-                                Font.system(size: 25)
-                                    .weight(.bold)
-                            )
-                            .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
-                            
-                        Text("Monto")
-                            .font(
-                                Font.system( size: 20)
-                                    .weight(.bold)
-                            )
-                            .foregroundColor(.black)
-                            .bold()
-                        
-                            
-                        
-                        Text("\(card.IMPORTE)")
+                        Text("\(card.NOMBRE_DONANTE)")
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)
                             )
                             .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
-                           
+                        
                         Text("Domicilio")
                             .font(
                                 Font.system(size: 20)
@@ -101,6 +118,7 @@ struct DetallesReciboView: View {
                                     .weight(.semibold)
                             )
                             .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                            .padding(.horizontal, 0.5)
                             
                         Text("Referencia de domicilio")
                             .font(
@@ -116,9 +134,6 @@ struct DetallesReciboView: View {
                                     .weight(.semibold)
                             )
                             .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
-                            
-                        
-                        
                     }
                     
                     VStack(alignment: .leading){
@@ -171,17 +186,20 @@ struct DetallesReciboView: View {
                             .foregroundColor(.black)
                             .padding(.top, 0.7)
                         
-                            
-                        
                         TextField("Comentario", text: $comentario)
                             .disableAutocorrection(true)
-                            .frame(width: 297,height: 80,alignment: .topLeading)
-                            .border(.black)
+                            .frame(height: 48)
+                            .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
+                            .cornerRadius(5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(lineWidth: 1.0)
+                            )
                         
                         if sinComentario && pagado == 0 {
-                                        Text("Ingresa un comentario")
-                                            .foregroundColor(.red)
-                                    }
+                            Text("Ingresa un comentario")
+                                .foregroundColor(.red)
+                        }
                         
                         Text("Estatus")
                             .font(
@@ -189,15 +207,17 @@ struct DetallesReciboView: View {
                                     .weight(.bold)
                             )
                             .foregroundColor(.black)
-                            
+                            .padding(.top, 0.7)                        
                         
                         Picker("Picker", selection: $pagado) {
-                                    Text("Pagado").tag(1)
-                                    Text("No Pagado").tag(0)
-                                }
-                                .pickerStyle(.segmented)
-                                
-                      
+                            Text("Pagado").tag(1)
+                            Text("No Pagado").tag(0)
+                        }
+                        .padding(.horizontal, 40)
+                        .frame(width: 250, height: 60)
+                        .pickerStyle(SegmentedPickerStyle())
+                        .scaledToFit()
+                        .scaleEffect(CGSize(width: 1.5, height: 1.5))
                     }
                     .onAppear(){
                         pagado = card.ESTATUS_PAGO
@@ -217,7 +237,7 @@ struct DetallesReciboView: View {
                             
                             
                             
-                        }.frame(width: 308, height: 54)
+                        }.frame(maxWidth: .infinity,minHeight: 60)
                             .background(Color(red: 0, green: 59/255, blue: 92/255))
                             .cornerRadius(50)
                             .font(.system(size: 24).bold())
@@ -228,14 +248,30 @@ struct DetallesReciboView: View {
                                     title: Text("Enviar recibo"),
                                     message: Text("¿Seguro que desea enviar el recibo?"),
                                     primaryButton: .default(
-                                        Text("Enviar")
+                                        Text("Enviar"),
+                                        action: {
+                                            actualizarRecibo(id_bitacora: card.id, estatus_pago: pagado, comentario: comentario) {
+                                                conectado in
+                                                if (conectado == 0) {
+                                                    mensajeError = "Sin Conexión"
+                                                } else {
+                                                    regresar = true
+                                                    dismiss()
+                                                }
+                                            }
+                                            if (regresar == true) {
+                                                dismiss()
+                                            }
+                                        }
                                     ),
                                     secondaryButton: .destructive(
                                         Text("Cancelar")
                                     )
                                 )
                             }
-                        
+                        Text(mensajeError)
+                            .foregroundColor(.red)
+                            .bold()
                     }
                     
                 }

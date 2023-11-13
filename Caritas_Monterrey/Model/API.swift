@@ -8,21 +8,18 @@
 import Foundation
 
 struct Card: Codable, Identifiable {
-    var A_MATERNO: String
-    var A_PATERNO: String
     var DIRECCION: String
-    var EMAIL: String
     var ESTATUS_PAGO: Int
-    var FECHA_COBRO: String
+    var FECHA_PAGO: String
     var ID_DONANTE: Int
-    var ID_RECOLECTOR: Int
-    var IMPORTE: Int
-    var NOMBRE: String
+    var ID_RECIBO: String
+    var IMPORTE: Float
+    var NOMBRE_DONANTE: String
     var REFERENCIA_DOMICILIO: String
     var TEL_CASA: String
     var TEL_MOVIL: String
-    var id: String
-    
+    var id: Int
+   
 }
 
 struct Recolector {
@@ -49,7 +46,8 @@ func loginRecolector(username: String, password: String, completion: @escaping (
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print("Error: \(error)")
-                completion(0)
+                let userId = -1
+                completion(-1)
                 return
             }
             
@@ -170,6 +168,70 @@ func callApi() -> Array<Card>{
     print("Lista2: \(cards) ")
     
     return cards
+}
+
+func actualizarRecibo(id_bitacora: Int, estatus_pago: Int, comentario: String, completion: @escaping (Int) -> Void) {
+    guard let url = URL(string: "http://10.14.255.85:8085/actualizarRecibo") else {
+        print("Murio en la URL")
+        return
+    }
+    
+    struct UploadData: Codable {
+        let ID_BITACORA: Int
+        let ESTATUS_PAGO: Int
+        let COMENTARIOS: String
+    }
+    
+    let conectado = 0
+    completion(0)
+    
+    let uploadDataModel = UploadData(ID_BITACORA: id_bitacora, ESTATUS_PAGO: estatus_pago, COMENTARIOS: comentario)
+    
+    guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
+        print("Murio en el JSONData")
+        return
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "PUT"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpBody = jsonData
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        guard error == nil else {
+            print("Error: error calling PUT")
+            print(error!)
+            let conectado = 0
+            completion(0)
+            return
+        }
+        guard let data = data else {
+            print("Error: Did not receive data")
+            return
+        }
+        guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+            print("Error: HTTP request failed")
+            return
+        }
+        do {
+            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                print("Error: Cannot convert data to JSON object")
+                return
+            }
+            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                print("Error: Cannot convert JSON object to Pretty JSON data")
+                return
+            }
+            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                print("Error: Could print JSON in String")
+                return
+            }
+            
+            print(prettyPrintedJson)
+        } catch {
+            print("Error: Trying to convert JSON data to string")
+            return
+        }
+    }.resume()
 }
 
 var listaCards = callApi()

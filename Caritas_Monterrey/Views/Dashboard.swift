@@ -1,6 +1,6 @@
 //
 //  Dashboard.swift
-//  Caritas_Monterrey
+//  Caritas_Monterrey Sprint 2
 //
 //  Created by Alumno on 18/10/23.
 //
@@ -23,26 +23,44 @@ struct Dashboard: View {
                         
                     VStack(alignment: .leading) {
                         Text("Bienvenido de Vuelta")
-                            .font(.system(size: 26).bold())
+                            .font(.system(size: 30).bold())
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                             .padding(.trailing, 60)
+                            .padding(.top, 30)
                         Text("Estas son tus recolecciones de hoy")
                             .font(.title3)
                             .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .padding(.trailing, 30)
-                        Picker(selection: $selectedFilter, label: Text("Ordenar por").font(.title)) {
-                                                Text("No cobrados").tag(0)
-                                                Text("Cobrados").tag(1)
-                        }.colorMultiply(.black).colorInvert()
-                            .padding(.top, -19)
-                            .padding(.leading, -11)
+                            .foregroundColor(Color.white.opacity(0.5))
+                            .padding(.trailing, 20)
+                        
+                        ZStack{
+                                                Rectangle()
+                                                    .foregroundColor(Color.white.opacity(0.5))
+                                                    .frame(width: 173, height: 40)
+                                                    .cornerRadius(10)
+                                                HStack{
+                                                   
+                                                    Picker(selection: $selectedFilter, label: Text("Ordenar por").font(.title).bold()){
+                                                                            Text("No cobrados").tag(2).font(.system(size: 12))
+                                                                            Text("Cobrados").tag(1).font(.system(size: 12))
+                                                                            Text("Todos").tag(0).font(.system(size: 12))
+                                                }.colorMultiply(.black).colorInvert()
+                                                       
+                                                        
+                                                    //.colorMultiply(.black)
+                                            }
+                                            }.scaleEffect(0.8)
+                                                .offset(x: -75, y: -5)
+                                                //.padding(.top, -19)
+                                                .padding(.leading, -11)
+                                                //.pickerStyle(.segmented)
+                                                .frame(width: 300)
                     }
                 }
                 VStack {
                     List(listaPrueba) { cardItem in
-                        if cardItem.ESTATUS_PAGO != 1 {
+                        if (cardItem.FECHA_PAGO == "") {
                             NavigationLink {
                                 DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
                             } label: {
