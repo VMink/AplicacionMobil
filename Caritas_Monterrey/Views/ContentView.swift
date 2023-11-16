@@ -68,7 +68,7 @@ struct ContentView: View {
                                 mensajeError = ""
                                 UserDefaults.standard.setValue(userId, forKey: "userId")
                             } else if (userId == -1) {
-                                mensajeError = "Ha ocurrido un error"
+                                mensajeError = "Ha ocurrido un error \n Revise su conexión a Internet"
                             } else {
                                 mensajeError = "Credenciales Incorrectas"
                             }
