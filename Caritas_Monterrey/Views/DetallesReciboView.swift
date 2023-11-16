@@ -266,9 +266,6 @@ struct DetallesReciboView: View {
                                     )
                                 )
                             }
-                        Text(mensajeError)
-                            .foregroundColor(.red)
-                            .bold()
                     }
                     
                 }
