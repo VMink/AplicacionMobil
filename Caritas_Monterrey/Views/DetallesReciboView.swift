@@ -12,7 +12,7 @@ struct DetallesReciboView: View {
     @State private var showAlert = false
     @State private var pagado = 0
     @State private var sinComentario = false
-    @State private var mensajeError = ""
+    @Binding var mensajeError: Bool
     @State private var regresar = false
     @Environment(\.dismiss) private var dismiss
     var card: Card
@@ -253,15 +253,12 @@ struct DetallesReciboView: View {
                                             actualizarRecibo(id_bitacora: card.id, estatus_pago: pagado, comentario: comentario) {
                                                 conectado in
                                                 if (conectado == 0) {
-                                                    mensajeError = "Sin Conexión"
+                                                    mensajeError = true
                                                 } else {
-                                                    regresar = true
                                                     dismiss()
                                                 }
                                             }
-                                            if (regresar == true) {
-                                                dismiss()
-                                            }
+                                            dismiss()
                                         }
                                     ),
                                     secondaryButton: .destructive(
@@ -293,6 +290,7 @@ func validateInput(_ input: String) -> Bool {
 struct DetallesReciboView_Previews: PreviewProvider {
     static var previews: some View {
         let card1: Card = listaCards[0]
-        DetallesReciboView(card: card1)
+        @State var messageError = false
+        DetallesReciboView(mensajeError: $messageError, card: card1)
     }
 }
