@@ -182,9 +182,6 @@ func actualizarRecibo(id_bitacora: Int, estatus_pago: Int, comentario: String, c
         let COMENTARIOS: String
     }
     
-    let conectado = 0
-    completion(0)
-    
     let uploadDataModel = UploadData(ID_BITACORA: id_bitacora, ESTATUS_PAGO: estatus_pago, COMENTARIOS: comentario)
     
     guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
