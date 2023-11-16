@@ -66,7 +66,7 @@ struct Dashboard: View {
                             //morado, pendientes
                             if(selectedFilter == 0 || selectedFilter == 3){
                                 NavigationLink {
-                                    DetallesReciboView(mensajeError: $mensajeError, card: cardItem.navigationBarBackButtonHidden()
+                                    DetallesReciboView(mensajeError: $mensajeError, card: cardItem).navigationBarBackButtonHidden()
                                 } label: {
                                     Cards(card: cardItem)
                                 }
