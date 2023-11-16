@@ -10,6 +10,7 @@ import SwiftUI
 struct Dashboard: View {
     @State var listaPrueba :Array<Card> = []
     @State private var selectedFilter = 0
+    @State private var mensajeError = false
     
     var body: some View {
         NavigationStack {
@@ -65,7 +66,7 @@ struct Dashboard: View {
                             //morado, pendientes
                             if(selectedFilter == 0 || selectedFilter == 3){
                                 NavigationLink {
-                                    DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
+                                    DetallesReciboView(mensajeError: $mensajeError, card: cardItem.navigationBarBackButtonHidden()
                                 } label: {
                                     Cards(card: cardItem)
                                 }
@@ -104,6 +105,9 @@ struct Dashboard: View {
                     
             }
             .ignoresSafeArea()
+            .alert(isPresented: $mensajeError) {
+                Alert(title: Text("Ha ocurrido un error"), message: Text("Revisa tu conexión a internet"), dismissButton: .default(Text("Aceptar")))
+            }
         }
     }
 }
