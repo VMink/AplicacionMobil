@@ -42,8 +42,9 @@ struct Dashboard: View {
                                                 HStack{
                                                    
                                                     Picker(selection: $selectedFilter, label: Text("Ordenar por").font(.title).bold()){
-                                                                            Text("No cobrados").tag(2).font(.system(size: 12))
-                                                                            Text("Cobrados").tag(1).font(.system(size: 12))
+                                                                            Text("No Pagados").tag(2).font(.system(size: 12))
+                                                                            Text("Pagados").tag(1).font(.system(size: 12))
+                                                                            Text(" Pendientes").tag(3).font(.system(size: 12))
                                                                             Text("Todos").tag(0).font(.system(size: 12))
                                                 }.colorMultiply(.black).colorInvert()
                                                        
@@ -61,15 +62,26 @@ struct Dashboard: View {
                 VStack {
                     List(listaPrueba) { cardItem in
                         if (cardItem.FECHA_PAGO == "" && cardItem.ESTATUS_PAGO != 1) {
-                            NavigationLink {
-                                DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
-                            } label: {
+                            //morado, pendientes
+                            if(selectedFilter == 0 || selectedFilter == 3){
+                                NavigationLink {
+                                    DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
+                                } label: {
+                                    Cards(card: cardItem)
+                                }
+                            }
+                            
+                            
+                        } else if (cardItem.ESTATUS_PAGO == 1) {
+                            //verde, pagados
+                            if(selectedFilter == 0 || selectedFilter == 1){
                                 Cards(card: cardItem)
                             }
-                        } else if (cardItem.ESTATUS_PAGO == 1) {
-                            Cards(card: cardItem)
+                            
                         } else {
-                            Cards(card: cardItem)
+                            if(selectedFilter == 0 || selectedFilter == 2){
+                                Cards(card: cardItem)
+                            }
                         }
                     }
                     .listStyle(.plain)
