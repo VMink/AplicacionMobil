@@ -1,3 +1,9 @@
+IF NOT EXISTS (SELECT 1 FROM sys.databases WHERE name = 'Donation_Tracking_DB')
+BEGIN
+    CREATE DATABASE Donation_Tracking_DB;
+END;
+GO
+
 USE Donation_Tracking_DB;
 
 DROP TABLE IF EXISTS OPE_BITACORA_PAGOS_DONATIVOS;
@@ -388,6 +394,8 @@ GO
 
 --POBLACION
 -- Crear OPE_MANAGERS
+EXEC InsertarNuevoManager @A_PATERNO = 'Lopez', @A_MATERNO = 'Lopez', @NOMBRE = 'Clara', @USUARIO = 'ClaraAdmin', @PASS = 'clara123';
+EXEC InsertarNuevoManager @A_PATERNO = '1234', @A_MATERNO = '1234', @NOMBRE = '1234', @USUARIO = '1234', @PASS = '1234';
 EXEC InsertarNuevoManager @A_PATERNO = 'Tellez', @A_MATERNO = 'Mireles', @NOMBRE = 'Gustavo Admin', @USUARIO = 'Gustavoadmin', @PASS = '12345';
 EXEC InsertarNuevoManager @A_PATERNO = 'Argueta', @A_MATERNO = 'Wolke', @NOMBRE = 'Maria Fernanda Admin', @USUARIO = 'Maferadmin', @PASS = 'PawPatr0l13+';
 EXEC InsertarNuevoManager @A_PATERNO = 'Lugo', @A_MATERNO = 'Quintana', @NOMBRE = 'Eduardo Francisco Admin', @USUARIO = 'Lalodmin', @PASS = 'PawPatr0l13+';
@@ -415,8 +423,8 @@ EXEC InsertarNuevoManager @A_PATERNO = 'Scott', @A_MATERNO = 'Mitchell', @NOMBRE
 EXEC InsertarNuevoManager @A_PATERNO = 'Smith', @A_MATERNO = 'Davis', @NOMBRE = 'Jacobadmin', @USUARIO = 'jacob.smith.admin', @PASS = 'AdminJacobSecure123'
 EXEC InsertarNuevoManager @A_PATERNO = 'Taylor', @A_MATERNO = 'Johnson', @NOMBRE = 'Johnadmin', @USUARIO = 'john.smith.admin', @PASS = 'AdminPassword123';
 -- Crear OPE_RECOLECTORES
-EXEC InsertarNuevoRecolector @USUARIO = 'claraRecolector', @PASS = 'clara123', @A_PATERNO = 'Lopez', @A_MATERNO = 'Lopez', @NOMBRE = 'Clara', @ZONA = 'Guadalupe', @ID_MANAGER = 1;
-EXEC InsertarNuevoRecolector @USUARIO = '1234', @PASS = '1234', @A_PATERNO = 'Lopez', @A_MATERNO = 'Lopez', @NOMBRE = 'Clara', @ZONA = 'Guadalupe', @ID_MANAGER = 1;
+EXEC InsertarNuevoRecolector @USUARIO = 'ClaraRecolector', @PASS = 'clara123', @A_PATERNO = 'Lopez', @A_MATERNO = 'Lopez', @NOMBRE = 'Clara', @ZONA = 'Guadalupe', @ID_MANAGER = 1;
+EXEC InsertarNuevoRecolector @USUARIO = '1234', @PASS = '1234', @A_PATERNO = '1234', @A_MATERNO = '1234', @NOMBRE = '1234', @ZONA = 'Guadalupe', @ID_MANAGER = 1;
 EXEC InsertarNuevoRecolector @USUARIO = 'gustavoRecolector', @PASS = '12345', @A_PATERNO = 'Tellez', @A_MATERNO = 'Mireles', @NOMBRE = 'Gustavo', @ZONA = 'Guadalupe', @ID_MANAGER = 3;
 EXEC InsertarNuevoRecolector @USUARIO = 'aferRecolector', @PASS = 'PawPatr0l13+', @A_PATERNO = 'Argueta', @A_MATERNO = 'Wolke', @NOMBRE = 'Maria Fernanda', @ZONA = 'Central', @ID_MANAGER = 1;
 EXEC InsertarNuevoRecolector @USUARIO = 'laloRecolector', @PASS = 'PawPatr0l13+', @A_PATERNO = 'Lugo', @A_MATERNO = 'Quintana', @NOMBRE = 'Eduardo Francisco', @ZONA = 'Escobedo', @ID_MANAGER = 2;
@@ -460,7 +468,7 @@ EXEC InsertarNuevaDireccion @Direccion = 'San Pedro, Arquitectos, Ext: 284, Int:
 EXEC InsertarNuevaDireccion @Direccion = 'Guadalupe, Primavera, Ext: 6969, Int: D', @ReferenciaDomicilio = 'Cerca de Aulas 4';
 EXEC InsertarNuevaDireccion @Direccion = 'Guadalupe, Altavista, Ext: 9999, Int: Ee', @ReferenciaDomicilio = 'Cerca de Aulas 5';
 EXEC InsertarNuevaDireccion @Direccion = 'Santiago, Ingenieros, Ext: 2, Int: 2', @ReferenciaDomicilio = 'Cerca de Aulas 6';
-EXEC InsertarNuevaDireccion @Direccion = 'Santiago, Arquitectos, Ext: Apartamento 533, Int:6X', @ReferenciaDomicilio = 'Por tec';
+EXEC InsertarNuevaDireccion @Direccion = 'Santiago, Arquitectos, Ext: 533, Int:6X', @ReferenciaDomicilio = 'Por tec';
 -- Crear OPE_DONANTES
 EXEC InsertarNuevoDonante @A_PATERNO = 'Mireles', @A_MATERNO = 'Tellez', @NOMBRE = 'Gustavo', @FECHA_NAC = '1992-07-10', @EMAIL = 'gustavo.mireles.donante@tec.mx', @ID_DIRECCION_COBRO = 3, @TEL_CASA = '+52 81 20680688', @TEL_MOVIL = '+52 998 55021790', @GENERO = 'M';
 EXEC InsertarNuevoDonante @A_PATERNO = 'Argueta', @A_MATERNO = 'Wolke', @NOMBRE = 'Maria Fernanda', @FECHA_NAC = '1985-11-20', @EMAIL = 'maferargueta@tec.mx', @ID_DIRECCION_COBRO = 1, @TEL_CASA = '+52 951 91661830', @TEL_MOVIL = '+52 443 45565954', @GENERO = 'M';
