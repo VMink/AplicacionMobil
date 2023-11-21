@@ -14,6 +14,17 @@ conn_str = (
     f"TrustServerCertificate={os.environ.get('TrustServerCertificate')}"
 )
 
+"""Windows Authentication:
+conn_str = (
+    "DRIVER={ODBC Driver 18 for SQL Server};"
+    "SERVER=localhost;"
+    "DATABASE=Donation_Tracking_DB;"
+    "UID=SA;"
+    "Trusted_Connection=yes;"
+    "TrustServerCertificate=yes"
+)
+"""
+
 def get_db_connection():
     """
     Method to create a connection with the database.
@@ -44,7 +55,7 @@ def obtener_datos_generales():
         connection = pyodbc.connect(conn_str)
         cursor = connection.cursor()
         cursor.execute("EXEC ObtenerDatosDiariosManager")
-        data = [{'id': int(row[0]), 'ID_DONANTE': int(row[1]), 'ID_RECOLECTOR': int(row[2]), 'USUARIO_RECOLECTOR': row[3], 'ID_RECIBO': row[4], 'FECHA_COBRO': row[5], 'FECHA_PAGO': row[6], 'IMPORTE': row[7], 'ESTATUS_PAGO': int(row[8]), 'COMENTARIOS': row[9], 'TEL_CASA': row[10], 'TEL_MOVIL': row[11], 'DIRECCION': row[12], 'REFERENCIA_DOMICILIO': row[13], 'NOMBRE_DONANTE': row[14]} for row in cursor.fetchall()]
+        data = [{'id': int(row[0]), 'ID_DONANTE': int(row[1]), 'ID_RECOLECTOR': int(row[2]), 'USUARIO_RECOLECTOR': row[3], 'ID_RECIBO': row[4], 'FECHA_COBRO': row[5],  'FECHA_PAGO': row[6] if row[6] is not None else '', 'IMPORTE': row[7], 'ESTATUS_PAGO': int(row[8]), 'COMENTARIOS': row[9], 'TEL_CASA': row[10], 'TEL_MOVIL': row[11], 'DIRECCION': row[12], 'REFERENCIA_DOMICILIO': row[13], 'NOMBRE_DONANTE': row[14]} for row in cursor.fetchall()]
         connection.close()
         return jsonify(data), 200
 
@@ -58,10 +69,10 @@ def obtener_recibos_recolector(IdRecolector):
     particular day.
 
     Parameters:
-    IdRecolector: Id of the Delivery Guy from which to obtain the receipts.
+    IdRecolector: Id of the Delivery Man from which to obtain the receipts.
 
     Returns:
-    The data from all receipts of a particular delivery guy and a particular day, otherwise
+    The data from all receipts of a particular delivery man and a particular day, otherwise
     an error message.
     """
     try:
@@ -80,7 +91,9 @@ def actualizar_recibo(ID_BITACORA, ESTATUS_PAGO, COMENTARIOS):
     Endpoint to update a receipt.
 
     Parameters:
-    Null
+    ID_BITACORA: The ID of the receipt you want to update
+    ESTATUS_PAGO: The new status of the receipt (int)
+    COMENTARIOS: A comment to add to the receipt
 
     Returns:
     A successful update message, otherwise an error message.
@@ -100,11 +113,11 @@ def actualizar_recibo(ID_BITACORA, ESTATUS_PAGO, COMENTARIOS):
 
 def login_recolector(USUARIO, PASS):
     """
-    Endpoint to validate the credentials of a delivery guy.
+    Endpoint to validate the credentials of a delivery man.
 
     Parameters:
-    USUARIO: Username of the delivery guy.
-    PASS: Password of the delivery guy.
+    USUARIO: Username of the delivery man.
+    PASS: Password of the delivery man.
 
     Returns:
     The authentication status, otherwise an error message.
