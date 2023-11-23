@@ -116,6 +116,7 @@ struct ContentView: View {
                 endPoint: UnitPoint(x: 0.99, y: 1)
                 )
                 )}
+        .navigationBarBackButtonHidden(true)
     }
 }
 
