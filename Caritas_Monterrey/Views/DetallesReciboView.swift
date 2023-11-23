@@ -277,6 +277,9 @@ struct DetallesReciboView: View {
             
         }
         
+        .onTapGesture {
+                    hideKeyboard()
+            }
     }
 }
 

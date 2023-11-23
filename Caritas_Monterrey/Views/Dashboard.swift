@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import CoreMotion
 
 struct Dashboard: View {
     @State var listaPrueba :Array<Card> = []
     @State private var selectedFilter = 0
     @State private var mensajeError = false
+    @State var xActual = 0.0
     
+    let motion = CMMotionManager()
     var body: some View {
         NavigationStack {
             VStack{
@@ -23,17 +26,39 @@ struct Dashboard: View {
                     .clipped()
                         
                     VStack(alignment: .leading) {
-                        Text("Bienvenido de Vuelta")
-                            .font(.system(size: 30).bold())
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding(.trailing, 60)
-                            .padding(.top, 30)
-                        Text("Estas son tus recolecciones de hoy")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color.white.opacity(0.5))
-                            .padding(.trailing, 20)
+                        
+                        HStack{
+                            VStack{
+                                Text("Bienvenido de Vuelta")
+                                    .font(.system(size: 29).bold())
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .padding(.trailing, 60)
+                                    .padding(.top, 30)
+                                
+                                Text("Estas son tus recolecciones de hoy")
+                                    .font(.system(size: 19))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color.white.opacity(0.5))
+                                    .padding(.trailing, 30)
+                            }
+                            
+                            
+                            NavigationLink(destination: ContentView()) {
+                                
+                                            Image("door-exit")
+                                                .resizable(resizingMode: .stretch)
+                                                .frame(width: 30, height: 30)
+                                                .colorInvert()
+                                                .padding(.top, 15)
+                                                .padding(.leading, -28)
+                                        }
+                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                                        .navigationBarHidden(true)
+                            
+                        }
+                        
+                        
                         
                         ZStack{
                                                 Rectangle()
@@ -43,18 +68,19 @@ struct Dashboard: View {
                                                 HStack{
                                                    
                                                     Picker(selection: $selectedFilter, label: Text("Ordenar por").font(.title).bold()){
-                                                                            Text("No Pagados").tag(2).font(.system(size: 12))
-                                                                            Text("Pagados").tag(1).font(.system(size: 12))
-                                                                            Text(" Pendientes").tag(3).font(.system(size: 12))
-                                                                            Text("Todos").tag(0).font(.system(size: 12))
-                                                }.colorMultiply(.black).colorInvert()
+                                                                            Text("No Pagados").tag(2).font(.system(size: 20))
+                                                                            Text("Pagados").tag(1).font(.system(size: 20))
+                                                                            Text(" Pendientes").tag(3).font(.system(size: 20))
+                                                                            Text("Todos").tag(0).font(.system(size: 20))
+                                                    }.colorMultiply(.black).colorInvert()
+                                                        
                                                        
                                                         
                                                     //.colorMultiply(.black)
                                             }
                                             }.scaleEffect(0.8)
                                                 .offset(x: -75, y: -5)
-                                                //.padding(.top, -19)
+                                                .padding(.top, -10)
                                                 .padding(.leading, -11)
                                                 //.pickerStyle(.segmented)
                                                 .frame(width: 300)
@@ -110,10 +136,37 @@ struct Dashboard: View {
             }
         }
     }
+    
+    func startAccelerometer(){
+        if (motion.isAccelerometerAvailable){
+            //Sensar cada 0.5 segundos
+            motion.deviceMotionUpdateInterval = 0.5
+            
+            //Iniciar el "escuchar" el acelerometro
+            motion.startDeviceMotionUpdates(to: .main) { data, error in
+                if let data = data {
+                    xActual = data.userAcceleration.x
+                    print(xActual)
+                    
+                    if (abs(xActual) > 2) {
+                        selectedFilter = 0
+                    }
+                }
+            }
+        }
+    }
 }
+
+
 
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
         Dashboard()
+    }
+}
+
+struct Previews_Dashboard_LibraryContent: LibraryContentProvider {
+    var views: [LibraryItem] {
+        LibraryItem(/*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/)
     }
 }
