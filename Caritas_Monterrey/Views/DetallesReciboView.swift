@@ -148,7 +148,7 @@ struct DetallesReciboView: View {
                             .padding(.top, 0.7)
                             
                         
-                        Text("\(card.TEL_CASA)")
+                        Link("\(card.TEL_CASA)", destination: URL(string: "tel://\(card.TEL_CASA)")!)
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)
@@ -167,7 +167,7 @@ struct DetallesReciboView: View {
                             .foregroundColor(.black)
                             .padding(.top, 0.7)
                             
-                        Text("\(card.TEL_MOVIL)")
+                        Link("\(card.TEL_MOVIL)", destination: URL(string: "tel://\(card.TEL_MOVIL)")!)
                             .font(
                                 Font.system(size: 18)
                                     .weight(.semibold)

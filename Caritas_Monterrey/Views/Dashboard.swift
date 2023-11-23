@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import CoreMotion
 
 struct Dashboard: View {
     @State var listaPrueba :Array<Card> = []
     @State private var selectedFilter = 0
     @State private var mensajeError = false
+    @State var xActual = 0.0
+    
+    let motion = CMMotionManager()
     
     var body: some View {
         NavigationStack {
@@ -51,6 +55,9 @@ struct Dashboard: View {
                                         }
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                                         .navigationBarHidden(true)
+                                        .onAppear(perform: {
+                                            startAccelerometer()
+                                        })
                             
                         }
                         
@@ -126,6 +133,24 @@ struct Dashboard: View {
             .ignoresSafeArea()
             .alert(isPresented: $mensajeError) {
                 Alert(title: Text("Ha ocurrido un error"), message: Text("Revisa tu conexión a internet"), dismissButton: .default(Text("Aceptar")))
+            }
+        }
+    }
+    
+    func startAccelerometer(){
+        if (motion.isAccelerometerAvailable){
+            //Sensar cada 0.5 segundos
+            motion.deviceMotionUpdateInterval = 0.5
+            
+            //Iniciar el "escuchar" el acelerometro
+            motion.startDeviceMotionUpdates(to: .main) { data, error in
+                if let data = data {
+                    xActual = data.userAcceleration.x
+                    
+                    if (abs(xActual) > 1) {
+                        selectedFilter = 0
+                    }
+                }
             }
         }
     }
