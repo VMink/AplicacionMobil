@@ -119,9 +119,6 @@ struct ContentView: View {
                 )
                 )}
         .navigationBarBackButtonHidden(true)
-        .onTapGesture {
-                    hideKeyboard()
-            }
     }
 }
 
