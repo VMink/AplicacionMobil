@@ -26,18 +26,35 @@ struct EmptyDashView: View {
                   )
                 
                 VStack(alignment: .leading) {
-                    Text("Bienvenido de Vuelta")
-                        .font(.system(size: 26).bold())
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 60)
-                        .padding(.top, 20)
-                    
-                    Text("Estas son tus recolecciones de hoy")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 30)
+                    HStack{
+                        VStack{
+                            Text("Bienvenido de Vuelta")
+                                .font(.system(size: 29).bold())
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding(.trailing, 60)
+                                .padding(.top, 30)
+                            
+                            Text("Estas son tus recolecciones de hoy")
+                                .font(.system(size: 19))
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.white.opacity(0.5))
+                                .padding(.trailing, 30)
+                        }
+                        
+                        
+                        NavigationLink(destination: ContentView()) {
+                            Image("door-exit")
+                                .resizable(resizingMode: .stretch)
+                                .frame(width: 30, height: 30)
+                                .colorInvert()
+                                .padding(.top, 15)
+                                .padding(.leading, -28)
+                        }
+                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                                .navigationBarHidden(true)
+                        
+                    }
                 }
             }
             

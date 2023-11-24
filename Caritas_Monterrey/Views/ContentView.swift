@@ -76,6 +76,8 @@ struct ContentView: View {
                             dashboardRecolector { cards in
                                 if (cards.isEmpty && userId > 0) {
                                     navigateNoOrders = true
+                                    print(navigateNoOrders)
+                                    print(userId)
                                 } else if (!cards.isEmpty && userId > 0){
                                     isNavigating = true
                                 }
