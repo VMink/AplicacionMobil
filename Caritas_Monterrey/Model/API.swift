@@ -40,6 +40,7 @@ func loginRecolector(username: String, password: String, completion: @escaping (
         
         var request = URLRequest(url: apiUrl)
         request.httpMethod = "POST"
+        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
         
@@ -55,6 +56,11 @@ func loginRecolector(username: String, password: String, completion: @escaping (
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                         let userId = (json["id"] as? Int) ?? 0
+                        
+                        if let token = json["token"] as? String {
+                            UserDefaults.standard.setValue(token, forKey: "token")
+                        }
+                        
                         completion(userId)
                     } else {
                         print("Error: Unable to parse API response as JSON.")
@@ -88,6 +94,9 @@ func dashboardRecolector(completion: @escaping ([Card]) -> Void) {
 
             var request = URLRequest(url: apiUrl)
             request.httpMethod = "POST"
+            
+            let token = UserDefaults.standard.string(forKey: "token")
+            request.setValue(token, forHTTPHeaderField: "Authorization")
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = jsonData
 
@@ -125,10 +134,10 @@ func dashboardRecolector(completion: @escaping ([Card]) -> Void) {
     }
 }
 
-func callApi() -> Array<Card>{
-    var cards: Array<Card> = []
+func callApi() -> [Card] {
+    var cards: [Card] = []
     
-    print("Entrando a API")
+    print("Entering API")
     
     guard let url = URL(string: "http://10.14.255.85:8085/recibosManager") else {
         return cards
@@ -137,42 +146,50 @@ func callApi() -> Array<Card>{
     let group = DispatchGroup()
     group.enter()
     
-    let task = URLSession.shared.dataTask(with: url){ data, response, error in
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    
+    let token = UserDefaults.standard.string(forKey: "token")
+    request.setValue(token, forHTTPHeaderField: "Authorization")
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
         let jsonDecoder = JSONDecoder()
-        if (data != nil) {
+        if let data = data {
             do {
-                let cardList = try jsonDecoder.decode([Card].self, from: data!)
+                let cardList = try jsonDecoder.decode([Card].self, from: data)
                 
-                print("Lista \(cardList) ")
+                print("List: \(cardList)")
                 
                 for cardItem in cardList {
-                    print("Id: \(cardItem.id) - Dirección \(cardItem.DIRECCION)")
+                    print("Id: \(cardItem.id) - Address: \(cardItem.DIRECCION)")
                 }
                 cards = cardList
             } catch {
                 print(error)
             }
-            if let datosAPI = String(data: data!, encoding: .utf8) {
+            
+            if let datosAPI = String(data: data, encoding: .utf8) {
                 print(datosAPI)
             }
-        }else{
-            
+        } else {
             print("No data")
         }
         group.leave()
     }
+    
     task.resume()
     group.wait()
     
     print("******************************************")
-    print("Lista2: \(cards) ")
+    print("List2: \(cards)")
     
     return cards
 }
 
 func actualizarRecibo(id_bitacora: Int, estatus_pago: Int, comentario: String, completion: @escaping (Int) -> Void) {
     guard let url = URL(string: "http://10.14.255.85:8085/actualizarRecibo") else {
-        print("Murio en la URL")
+        print("Murió en la URL")
         return
     }
     
@@ -185,12 +202,15 @@ func actualizarRecibo(id_bitacora: Int, estatus_pago: Int, comentario: String, c
     let uploadDataModel = UploadData(ID_BITACORA: id_bitacora, ESTATUS_PAGO: estatus_pago, COMENTARIOS: comentario)
     
     guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
-        print("Murio en el JSONData")
+        print("Murió en el JSONData")
         return
     }
     
     var request = URLRequest(url: url)
     request.httpMethod = "PUT"
+    
+    let token = UserDefaults.standard.string(forKey: "token")
+    request.setValue(token, forHTTPHeaderField: "Authorization")
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     request.httpBody = jsonData
     URLSession.shared.dataTask(with: request) { data, response, error in
