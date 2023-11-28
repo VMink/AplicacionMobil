@@ -13,6 +13,7 @@ struct Dashboard: View {
     @State private var selectedFilter = 0
     @State private var mensajeError = false
     @State var xActual = 0.0
+    @Environment(\.dismiss) private var dismiss
     
     let motion = CMMotionManager()
     
@@ -33,31 +34,33 @@ struct Dashboard: View {
                                     .font(.system(size: 29).bold())
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
-                                    .padding(.trailing, 60)
+                                    .padding(.trailing, 40)
                                     .padding(.top, 30)
                                 
                                 Text("Estas son tus recolecciones de hoy")
                                     .font(.system(size: 19))
                                     .fontWeight(.semibold)
                                     .foregroundColor(Color.white.opacity(0.5))
-                                    .padding(.trailing, 30)
+                                    .padding(.trailing, 15)
                             }
                             
+                            .padding(.trailing, 15)
+                            Button {
+                                dismiss()
+                            } label: {
+                                Image("door-exit")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .scaledToFit()
+                                    .colorInvert()
+                                    .padding(.top, 13)
+                            }.onAppear(perform: {
+                                startAccelerometer()
+                            })
                             
-                            NavigationLink(destination: ContentView()) {
-                                
-                                            Image("door-exit")
-                                                .resizable(resizingMode: .stretch)
-                                                .frame(width: 30, height: 30)
-                                                .colorInvert()
-                                                .padding(.top, 15)
-                                                .padding(.leading, -28)
-                                        }
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                                        .navigationBarHidden(true)
-                                        .onAppear(perform: {
-                                            startAccelerometer()
-                                        })
+                            
+                            
+                                        
                             
                         }
                         

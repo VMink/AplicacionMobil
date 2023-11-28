@@ -10,6 +10,7 @@ import SwiftUI
 struct EmptyDashView: View {
     @State private var selectedFilter = 0
     @State private var isFilterExpanded = false
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack{
@@ -32,27 +33,28 @@ struct EmptyDashView: View {
                                 .font(.system(size: 29).bold())
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                                .padding(.trailing, 60)
+                                .padding(.trailing, 40)
                                 .padding(.top, 30)
                             
                             Text("Estas son tus recolecciones de hoy")
                                 .font(.system(size: 19))
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.white.opacity(0.5))
-                                .padding(.trailing, 30)
+                                .padding(.trailing, 10)
                         }
                         
                         
-                        NavigationLink(destination: ContentView()) {
+                        .padding(.trailing, 15)
+                        Button {
+                            dismiss()
+                        } label: {
                             Image("door-exit")
-                                .resizable(resizingMode: .stretch)
+                                .resizable()
                                 .frame(width: 30, height: 30)
+                                .scaledToFit()
                                 .colorInvert()
-                                .padding(.top, 15)
-                                .padding(.leading, -28)
+                                .padding(.top, 13)
                         }
-                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                                .navigationBarHidden(true)
                         
                     }
                 }
