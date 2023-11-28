@@ -421,9 +421,9 @@ EXEC InsertarNuevoManager @A_PATERNO = 'Smith', @A_MATERNO = 'Davis', @NOMBRE = 
 EXEC InsertarNuevoManager @A_PATERNO = 'Taylor', @A_MATERNO = 'Johnson', @NOMBRE = 'Johnadmin', @USUARIO = 'john.smith.admin', @PASS = 'AdminPassword123';
 -- Crear OPE_RECOLECTORES
 EXEC InsertarNuevoRecolector @USUARIO = 'ClaraRecolector', @PASS = 'clara123', @A_PATERNO = 'Lopez', @A_MATERNO = 'Lopez', @NOMBRE = 'Clara', @ZONA = 'Guadalupe', @ID_MANAGER = 1;
-EXEC InsertarNuevoRecolector @USUARIO = 'GusRecolector', @PASS = 'gus123', @A_PATERNO = 'Tellez', @A_MATERNO = 'Mireles', @NOMBRE = 'Gustavo', @ZONA = 'Guadalupe', @ID_MANAGER = 3;
+EXEC InsertarNuevoRecolector @USUARIO = 'GustavoRecolector', @PASS = 'gus123', @A_PATERNO = 'Tellez', @A_MATERNO = 'Mireles', @NOMBRE = 'Gustavo', @ZONA = 'Guadalupe', @ID_MANAGER = 3;
 EXEC InsertarNuevoRecolector @USUARIO = 'MaferRecolector', @PASS = 'mafer123', @A_PATERNO = 'Argueta', @A_MATERNO = 'Wolke', @NOMBRE = 'Maria Fernanda', @ZONA = 'Central', @ID_MANAGER = 1;
-EXEC InsertarNuevoRecolector @USUARIO = 'LaloRecolector', @PASS = 'mafer123', @A_PATERNO = 'Lugo', @A_MATERNO = 'Quintana', @NOMBRE = 'Eduardo Francisco', @ZONA = 'Escobedo', @ID_MANAGER = 2;
+EXEC InsertarNuevoRecolector @USUARIO = 'LaloRecolector', @PASS = 'lalo123', @A_PATERNO = 'Lugo', @A_MATERNO = 'Quintana', @NOMBRE = 'Eduardo Francisco', @ZONA = 'Escobedo', @ID_MANAGER = 2;
 EXEC InsertarNuevoRecolector @USUARIO = 'AbiRecolector', @PASS = 'abi123', @A_PATERNO = 'Curiel', @A_MATERNO = 'López', @NOMBRE = 'Noemí Abigail', @ZONA = 'Santa Catarina', @ID_MANAGER = 4;
 EXEC InsertarNuevoRecolector @USUARIO = 'RamonRecolector', @PASS = 'ramon123', @A_PATERNO = 'Danzos', @A_MATERNO = 'García', @NOMBRE = 'Ramón Yuri', @ZONA = 'San Jeronimo', @ID_MANAGER = 5;
 EXEC InsertarNuevoRecolector @USUARIO = 'johndoe', @PASS = 'RecolectorPassword123', @A_PATERNO = 'Doe', @A_MATERNO = 'Johnson', @NOMBRE = 'John', @ZONA = 'Central', @ID_MANAGER = 1;
@@ -486,17 +486,43 @@ EXEC InsertarNuevoDonante @A_PATERNO = 'Rodríguez', @A_MATERNO = 'García', @NO
 EXEC InsertarNuevoDonante @A_PATERNO = 'Martínez', @A_MATERNO = 'López', @NOMBRE = 'Ana', @FECHA_NAC = '1992-07-12', @EMAIL = 'ana.martinez.donante@tec.mx', @ID_DIRECCION_COBRO = 18, @TEL_CASA = '+525567543247', @TEL_MOVIL = '+525552186232', @GENERO = 'F';
 EXEC InsertarNuevoDonante @A_PATERNO = 'Santos', @A_MATERNO = 'Gutiérrez', @NOMBRE = 'Luis', @FECHA_NAC = '1982-04-03', @EMAIL = 'luis.santos.donante@tec.mx', @ID_DIRECCION_COBRO = 19, @TEL_CASA = '+525567543247', @TEL_MOVIL = '+525552186232', @GENERO = 'F';
 -- Crear OPE_BITACORA_PAGOS_DONATIVOS
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2000, @ID_RECOLECTOR = 1, @ID_RECIBO = 123456, @IMPORTE = 7187.50, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2069, @ID_RECOLECTOR = 2, @ID_RECIBO = 654321, @IMPORTE = 7764.00, @ESTATUS_PAGO = 1, @COMENTARIOS = 'BLABLABLA';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2138, @ID_RECOLECTOR = 3, @ID_RECIBO = 987654, @IMPORTE = 9247.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2207, @ID_RECOLECTOR = 4, @ID_RECIBO = 246813, @IMPORTE = 6207.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2276, @ID_RECOLECTOR = 5, @ID_RECIBO = 135792, @IMPORTE = 8334.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2345, @ID_RECOLECTOR = 4, @ID_RECIBO = 864209, @IMPORTE = 1023.50, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2414, @ID_RECOLECTOR = 1, @ID_RECIBO = 128128, @IMPORTE = 2824.00, @ESTATUS_PAGO = 1, @COMENTARIOS = 'Entregado';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2483, @ID_RECOLECTOR = 2, @ID_RECIBO = 112233, @IMPORTE = 6806.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2552, @ID_RECOLECTOR = 3, @ID_RECIBO = 445566, @IMPORTE = 3254.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2621, @ID_RECOLECTOR = 1, @ID_RECIBO = 778899, @IMPORTE = 9970.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2690, @ID_RECOLECTOR = 2, @ID_RECIBO = 789123, @IMPORTE = 948.50, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2759, @ID_RECOLECTOR = 1, @ID_RECIBO = 256016, @IMPORTE = 5919.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2828, @ID_RECOLECTOR = 5, @ID_RECIBO = 987123, @IMPORTE = 2356.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
-EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2897, @ID_RECOLECTOR = 4, @ID_RECIBO = 456321, @IMPORTE = 5797.00, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+--Pedidos ClaraRecolector
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2000, @ID_RECOLECTOR = 1, @ID_RECIBO = 123456, @IMPORTE = 665.69, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2069, @ID_RECOLECTOR = 1, @ID_RECIBO = 629596, @IMPORTE = 209.55, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2138, @ID_RECOLECTOR = 1, @ID_RECIBO = 248838, @IMPORTE = 550.26, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2207, @ID_RECOLECTOR = 1, @ID_RECIBO = 868852, @IMPORTE = 893.12, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2276, @ID_RECOLECTOR = 1, @ID_RECIBO = 530749, @IMPORTE = 305.41, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2345, @ID_RECOLECTOR = 1, @ID_RECIBO = 644063, @IMPORTE = 7078.25, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 100, @ESTATUS_PAGO = 1, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 101, @ESTATUS_PAGO = 1, @COMENTARIOS = 'Pagado sin problemas';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 102, @ESTATUS_PAGO = 0, @COMENTARIOS = 'No estuvo en casa';
+--Pedidos GusRecolector
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2414, @ID_RECOLECTOR = 2, @ID_RECIBO = 356055, @IMPORTE = 922.59, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2483, @ID_RECOLECTOR = 2, @ID_RECIBO = 883245, @IMPORTE = 371.56, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2552, @ID_RECOLECTOR = 2, @ID_RECIBO = 193252, @IMPORTE = 7092.95, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2621, @ID_RECOLECTOR = 2, @ID_RECIBO = 484017, @IMPORTE = 386.45, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2690, @ID_RECOLECTOR = 2, @ID_RECIBO = 817170, @IMPORTE = 643.32, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2759, @ID_RECOLECTOR = 2, @ID_RECIBO = 601506, @IMPORTE = 1221.69, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 106, @ESTATUS_PAGO = 1, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 107, @ESTATUS_PAGO = 1, @COMENTARIOS = 'Pago confirmado';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 108, @ESTATUS_PAGO = 0, @COMENTARIOS = 'No contestó la puerta';
+--Pedidos MaferRecolector
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2828, @ID_RECOLECTOR = 3, @ID_RECIBO = 912251, @IMPORTE = 648.56, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2897, @ID_RECOLECTOR = 3, @ID_RECIBO = 938992, @IMPORTE = 1921.78, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2966, @ID_RECOLECTOR = 3, @ID_RECIBO = 260804, @IMPORTE = 4907.4, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 3035, @ID_RECOLECTOR = 3, @ID_RECIBO = 802759, @IMPORTE = 4566.74, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 3104, @ID_RECOLECTOR = 3, @ID_RECIBO = 134962, @IMPORTE = 630.86, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 3173, @ID_RECOLECTOR = 3, @ID_RECIBO = 406667, @IMPORTE = 3143.75, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 112, @ESTATUS_PAGO = 1, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 113, @ESTATUS_PAGO = 1, @COMENTARIOS = 'Solicita otra colecta el próximo mes';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 114, @ESTATUS_PAGO = 0, @COMENTARIOS = 'Necesita terminal';
+--Pedidos LaloRecolector
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 3242, @ID_RECOLECTOR = 4, @ID_RECIBO = 976288, @IMPORTE = 1566.52, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2000, @ID_RECOLECTOR = 4, @ID_RECIBO = 923958, @IMPORTE = 974.79, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2069, @ID_RECOLECTOR = 4, @ID_RECIBO = 759378, @IMPORTE = 493.47, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2138, @ID_RECOLECTOR = 4, @ID_RECIBO = 177653, @IMPORTE = 416.76, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2207, @ID_RECOLECTOR = 4, @ID_RECIBO = 967229, @IMPORTE = 331.98, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC InsertarNuevaBitacoraPagoDonativos @ID_DONANTE = 2276, @ID_RECOLECTOR = 4, @ID_RECIBO = 781446, @IMPORTE = 7511.09, @ESTATUS_PAGO = 0, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 118, @ESTATUS_PAGO = 1, @COMENTARIOS = '';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 119, @ESTATUS_PAGO = 1, @COMENTARIOS = 'Quiere donar mañana más';
+EXEC ActualizarBitacoraPagosDonativos @ID_BITACORA = 120, @ESTATUS_PAGO = 0, @COMENTARIOS = 'Dirección y números incorrectos';
