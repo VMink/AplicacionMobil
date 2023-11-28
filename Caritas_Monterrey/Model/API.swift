@@ -28,7 +28,7 @@ struct Recolector {
 
 func loginRecolector(username: String, password: String, completion: @escaping (Int) -> Void) {
     
-    let apiUrl = URL(string: "https://equipo17.tc2007b.tec.mx:8085/loginRecolector")!
+    let apiUrl = URL(string: "https://equipo17.tc2007b.tec.mx:8443/loginRecolector")!
     
     let parameters: [String: Any] = [
         "USUARIO": username,
@@ -82,7 +82,7 @@ func loginRecolector(username: String, password: String, completion: @escaping (
 func dashboardRecolector(completion: @escaping ([Card]) -> Void) {
     var cards: [Card] = []
 
-    let apiUrl = URL(string: "https://equipo17.tc2007b.tec.mx:8085/recibosRecolector")!
+    let apiUrl = URL(string: "https://equipo17.tc2007b.tec.mx:8443/recibosRecolector")!
 
     if let idRecolector = UserDefaults.standard.string(forKey: "userId") {
         let parameters: [String: Any] = [
@@ -139,7 +139,7 @@ func callApi() -> [Card] {
     
     print("Entering API")
     
-    guard let url = URL(string: "https://equipo17.tc2007b.tec.mx:8085/recibosManager") else {
+    guard let url = URL(string: "https://equipo17.tc2007b.tec.mx:8443/recibosManager") else {
         return cards
     }
     
@@ -188,7 +188,7 @@ func callApi() -> [Card] {
 }
 
 func actualizarRecibo(id_bitacora: Int, estatus_pago: Int, comentario: String, completion: @escaping (Int) -> Void) {
-    guard let url = URL(string: "https://equipo17.tc2007b.tec.mx:8085/actualizarRecibo") else {
+    guard let url = URL(string: "https://equipo17.tc2007b.tec.mx:8443/actualizarRecibo") else {
         print("Murió en la URL")
         return
     }
