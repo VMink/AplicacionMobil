@@ -148,12 +148,22 @@ struct DetallesReciboView: View {
                             .padding(.top, 0.7)
                             
                         
-                        Link("\(card.TEL_CASA)", destination: URL(string: "tel://\(card.TEL_CASA)")!)
-                            .font(
-                                Font.system(size: 18)
-                                    .weight(.semibold)
-                            )
-                            .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                        if(card.TEL_CASA == "")
+                        {
+                            Text("N/A")
+                                .font(
+                                    Font.system(size: 18)
+                                        .weight(.semibold)
+                                )
+                                .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                        }else{
+                            Link("\(card.TEL_CASA)", destination: URL(string: "tel://\(card.TEL_CASA)")!)
+                                .font(
+                                    Font.system(size: 18)
+                                        .weight(.semibold)
+                                )
+                                .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                        }
                             
                         
                         
