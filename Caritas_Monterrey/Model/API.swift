@@ -55,13 +55,18 @@ func loginRecolector(username: String, password: String, completion: @escaping (
             if let data = data {
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                        let userId = (json["id"] as? Int) ?? 0
-                        
-                        if let token = json["token"] as? String {
-                            UserDefaults.standard.setValue(token, forKey: "token")
+                        let message = (json["message"] as? String) ?? ""
+                        if (message == "Authentication successful") {
+                            if let token = json["token"] as? String {
+                                UserDefaults.standard.setValue(token, forKey: "token")
+                            }
+                            completion(1)
+                        } else if(message == "An invalid response was received from the upstream server"){
+                            print(message)
+                            completion(2)
+                        }else{
+                            completion(0)
                         }
-                        
-                        completion(userId)
                     } else {
                         print("Error: Unable to parse API response as JSON.")
                         completion(0) // or handle the error in a way that makes sense for your application
