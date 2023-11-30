@@ -44,6 +44,11 @@ En este proyecto se abordará el desarrollo de una solución integral y segura q
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+# Otros Repositorios
+[Repositorio del Manager](https://github.com/Maffergu/Manager_Caritas_Monterrey)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 # Files
 1. [Documento de Primera Entrega](https://docs.google.com/document/d/1FU--T_V6r2HdOvQUN66BRGiJ24qyE3vk9rTimNSH4_8/edit?usp=sharing)
 
@@ -53,4 +58,8 @@ En este proyecto se abordará el desarrollo de una solución integral y segura q
 
 4. [Documento de Cuarta Entrega](https://docs.google.com/document/d/1EQ6efuoSpdEh1jiPNQlQuVzKzS-0N2jxv4OXsIq4zaw/edit?usp=sharing)
 
-5. [Repositorio del Manager](https://github.com/Maffergu/Manager_Caritas_Monterrey)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# Notas
+- Los commits que pertenecen a usuarios de GitHub que no forman parte del equipo fueron realizados en realidad por miembros del equipo pero desde Macs del Laboratorio de iOS donde ya habían sesiones iniciadas. De tal modo, por accidente quedaron registrados esos commits con otro usuario.
+- Los comentarios de UI de entregas pasadas fueron revisados con el cliente y se implementaron aquellos que el socio formador nos indicó. 
